@@ -1,1 +1,59 @@
-
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP3sVGrqAR84ihWGw4gdCw2",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/maritriana2003-svg/challenge-alura-store/blob/main/TelecomX-ETL-Analysis.\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "uuVLX0h8pAzW"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd\n",
+        "import requests\n",
+        "\n",
+        "# 1. EXTRACCIÓN (Extract)\n",
+        "url = \"URL_DE_LA_API_TELECOM_X\" # Reemplaza con la URL real del desafío\n",
+        "response = requests.get(url)\n",
+        "\n",
+        "if response.status_code == 200:\n",
+        "    data = response.json()\n",
+        "    df = pd.DataFrame(data)\n",
+        "    print(\"Datos extraídos exitosamente\")\n",
+        "\n",
+        "# 2. TRANSFORMACIÓN (Transform) - Ejemplo de limpieza\n",
+        "df.drop_duplicates(inplace=True)\n",
+        "# Convertir fechas (ajusta el nombre de la columna según la API)\n",
+        "# df['fecha'] = pd.to_datetime(df['fecha'])\n",
+        "\n",
+        "# 3. CARGA (Load) - Guardar resultado para GitHub\n",
+        "df.to_csv('telecom_clean.csv', index=False)"
+      ]
+    }
+  ]
+}
